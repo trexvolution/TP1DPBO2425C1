@@ -6,86 +6,100 @@ class Electroshop{
 
     private:
 
-        string id[100];
-        string nama[100];
-        string kategori[100];
-        string brand[100];
-        int harga[100];
-
+        string id;
+        string nama;
+        string kategori;
+        string brand;
+        int harga;
+        
     public:
 
+    Electroshop(){
+    }
+
     Electroshop(string id, string nama, string kategori, string brand, int harga){
-        int limit = 0;
-        int flag = 0;
-        while (flag != 1 || limit != 99){
-            if(this->id[limit] == ""){
-                this->id[limit] = id;
-                this->nama[limit] = nama;
-                this->kategori[limit] = kategori;
-                this->brand[limit] = brand;
-                this->harga[limit] = harga;
-                flag = 1;
-            }
-            limit++;
-        }
+        this->id = id;
+        this->nama = nama;
+        this->kategori = kategori;
+        this->brand = brand;
+        this->harga = harga;
     }
 
-    int getData(string data){
-        int limit = 0;
-        int flag = 0;
-        while (flag != 1 || limit != 100){
-            if(this->id[limit] == data){
-                flag = 1;
-            }else{
-                limit++;
-            }
-        }
-        if(flag == 1){
-            return limit;
+    void setId(string id){
+        this->id = id;
+    }
+
+    string getId(){
+        return this->id;
+    }
+
+    void setNama(string nama){
+        this->nama = nama;
+    }
+
+    string getName(){
+        return this->nama;
+    }
+
+    void setKategori(string kategori){
+        this->kategori = kategori;
+    }
+
+    string getKategori(){
+        return this->kategori;
+    }
+
+    void setBrand(string brand){
+        this->brand = brand;
+    }
+
+    string getBrand(){
+        return this->brand;
+    }
+
+    void setHarga(int harga){
+        this->harga = harga;
+    }
+
+    int getHarga(){ 
+        return this->harga;
+    }
+
+    int IdLength(){
+        return id.length();
+    }
+
+    int namaLength(){
+        return nama.length();
+    }
+
+    int KategoriLength(){
+        return kategori.length();
+    }
+
+    int brandLength(){
+        return brand.length();
+    }
+
+    int hargaLength(){
+        return to_string(harga).length();
+    }
+
+    void editData(string nama, string kategori, string brand, int harga){
+        this->nama = nama;
+        this->kategori = kategori;
+        this->brand = brand;
+        this->harga = harga;
+    }
+
+    Electroshop* searchId(string id){
+        if(this->id == id){
+            return this;
         }else{
-            return 0;
+            return NULL;
         }
     }
-
-    string getId(int number){
-        return this->id[number];
-    }
-
-    string getName(int number){
-        return this->nama[number];
-    }
-
-    string getKategori(int number){
-        return this->kategori[number];
-    }
-
-    string getBrand(int number){
-        return this->brand[number];
-    }
-
-    int getHarga(int number){ 
-        return this->harga[number];
-    }
-
-    void editData(int nomor, string nama, string kategori, string brand, int harga){
-        this->nama[nomor] = nama;
-        this->kategori[nomor] = kategori;
-        this->brand[nomor] = brand;
-        this->harga[nomor] = harga;
-    }
-
-    void hapusData(int number){
-        for (int i = number; i < 100; i++){
-            this->id[i] = this->id[i + 1];
-            this->nama[i] = this->nama[i + 1];
-            this->kategori[i] = this->kategori[i + 1];  
-            this->brand[i] = this->brand[i + 1];
-            this->harga[i] = this->harga[i + 1];
-        }
-    }
-
+    
     ~Electroshop(){
     }
 };
-
-
