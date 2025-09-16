@@ -1,8 +1,10 @@
 <?php
+// Saya Nur Abdillah dengan NIM 2408515 mengerjakan Tugas Praktikum 1
+// dalam mata kuliah Desain Pemrograman Berorientasi Objek untuk keberkahan-Nya 
+// maka saya tidak akan melakukan kecurangan seperti yang telah di spesifikasikan
 session_start();
 require_once "Electroshop.php";
 
-// --- Inisialisasi data di session ---
 if (!isset($_SESSION['listBarang'])) {
     $_SESSION['listBarang'] = [];
 }
@@ -15,19 +17,19 @@ if (isset($_POST['tambah'])) {
     $brand = $_POST['brand'];
     $harga = $_POST['harga'];
 
-    // Upload gambar
     $gambar = null;
     if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] == 0) {
         $targetDir = "uploads/";
         if (!is_dir($targetDir)) mkdir($targetDir);
-        $fileName = time() . "_" . basename($_FILES['gambar']['name']);
-        $targetFile = $targetDir . $fileName;
-        move_uploaded_file($_FILES['gambar']['tmp_name'], $targetFile);
+        $targetFile = $targetDir . basename($_FILES["gambar"]["name"]);
+        move_uploaded_file($_FILES["gambar"]["tmp_name"], $targetFile);
         $gambar = $targetFile;
     }
 
     $barang = new Electroshop($id, $nama, $kategori, $brand, $harga, $gambar);
     $_SESSION['listBarang'][] = serialize($barang);
+    header("Location: index.php");
+    exit;
 }
 
 // --- Update Data ---
@@ -36,19 +38,20 @@ if (isset($_POST['update'])) {
     foreach ($_SESSION['listBarang'] as $key => $val) {
         $barang = unserialize($val);
         if ($barang->getId() == $id) {
-            $gambar = null;
+            $gambar = $barang->getGambar();
             if (isset($_FILES['gambar']) && $_FILES['gambar']['error'] == 0) {
                 $targetDir = "uploads/";
                 if (!is_dir($targetDir)) mkdir($targetDir);
-                $fileName = time() . "_" . basename($_FILES['gambar']['name']);
-                $targetFile = $targetDir . $fileName;
-                move_uploaded_file($_FILES['gambar']['tmp_name'], $targetFile);
+                $targetFile = $targetDir . basename($_FILES["gambar"]["name"]);
+                move_uploaded_file($_FILES["gambar"]["tmp_name"], $targetFile);
                 $gambar = $targetFile;
             }
             $barang->editData($_POST['nama'], $_POST['kategori'], $_POST['brand'], $_POST['harga'], $gambar);
             $_SESSION['listBarang'][$key] = serialize($barang);
         }
     }
+    header("Location: index.php");
+    exit;
 }
 
 // --- Hapus Data ---
@@ -60,6 +63,9 @@ if (isset($_GET['hapus'])) {
             unset($_SESSION['listBarang'][$key]);
         }
     }
+    $_SESSION['listBarang'] = array_values($_SESSION['listBarang']); // reindex
+    header("Location: index.php");
+    exit;
 }
 
 // --- Cari Data ---
@@ -78,19 +84,20 @@ if (isset($_POST['cari'])) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Electroshop</title>
+    <title>Electroshop Management</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         table { border-collapse: collapse; width: 100%; margin-top: 20px; }
         th, td { border: 1px solid #333; padding: 8px; text-align: center; }
         th { background-color: #eee; }
+        img { width: 80px; }
         .form-container { margin-bottom: 20px; padding: 10px; border: 1px solid #ccc; }
         input, button { padding: 6px; margin: 4px; }
     </style>
 </head>
 <body>
 
-<h1>Electroshop</h1>
+<h1>Electroshop Management</h1>
 
 <div class="form-container">
     <h2>Tambah Data</h2>
@@ -119,15 +126,16 @@ if (isset($_POST['cari'])) {
         <p>Brand: <?= $cariHasil->getBrand() ?></p>
         <p>Harga: <?= $cariHasil->getHarga() ?></p>
         <?php if ($cariHasil->getGambar()): ?>
-            <p><img src="<?= $cariHasil->getGambar() ?>" width="120"></p>
+            <img src="<?= $cariHasil->getGambar() ?>">
         <?php endif; ?>
     <?php elseif (isset($_POST['cari'])): ?>
         <p>Data tidak ditemukan.</p>
     <?php endif; ?>
 </div>
-
 <h2>Daftar Barang</h2>
+
 <table>
+
     <tr>
         <th>ID</th>
         <th>Nama</th>
@@ -147,7 +155,7 @@ if (isset($_POST['cari'])) {
             <td><?= $barang->getHarga() ?></td>
             <td>
                 <?php if ($barang->getGambar()): ?>
-                    <img src="<?= $barang->getGambar() ?>" width="80">
+                    <img src="<?= $barang->getGambar() ?>">
                 <?php else: ?>
                     Tidak ada gambar
                 <?php endif; ?>

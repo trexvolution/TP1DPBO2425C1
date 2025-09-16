@@ -1,4 +1,10 @@
+# Saya Nur Abdillah dengan NIM 2408515 mengerjakan Tugas Praktikum 1
+# dalam mata kuliah Desain Pemrograman Berorientasi Objek untuk keberkahan-Nya 
+# maka saya tidak akan melakukan kecurangan seperti yang telah di spesifikasikan
+
 class Electroshop:
+    
+    # Konstruktor: inisialisasi atribut barang (id, nama, kategori, brand, harga)
     def __init__(self, id=None, nama=None, kategori=None, brand=None, harga=None):
         self.id = id
         self.nama = nama
@@ -6,7 +12,7 @@ class Electroshop:
         self.brand = brand
         self.harga = harga
 
-    # Setters and Getters
+    # Bagian Setter dan Getter
     def set_id(self, id):
         self.id = id
 
@@ -37,7 +43,7 @@ class Electroshop:
     def get_harga(self):
         return self.harga
 
-    # Length methods
+    # Method untuk menghitung panjang string setiap atribut
     def id_length(self):
         return len(self.id) if self.id else 0
 
@@ -53,14 +59,14 @@ class Electroshop:
     def harga_length(self):
         return len(str(self.harga)) if self.harga is not None else 0
 
-    # Edit data
+    # Method untuk mengedit data barang
     def edit_data(self, nama, kategori, brand, harga):
         self.nama = nama
         self.kategori = kategori
         self.brand = brand
         self.harga = harga
 
-    # Search ID
+    # Method pencarian berdasarkan ID
     def search_id(self, id):
         if self.id == id:
             return self

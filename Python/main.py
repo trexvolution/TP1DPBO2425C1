@@ -1,9 +1,14 @@
-from Electroshop import Electroshop  # pastikan file Electroshop.py ada
+# Saya Nur Abdillah dengan NIM 2408515 mengerjakan Tugas Praktikum 1
+# dalam mata kuliah Desain Pemrograman Berorientasi Objek untuk keberkahan-Nya 
+# maka saya tidak akan melakukan kecurangan seperti yang telah di spesifikasikan
+
+from Electroshop import Electroshop  # import class Electroshop dari file Electroshop.py
 
 def main():
-    ListBarang = []
-    choice = 0
+    ListBarang = [] # list untuk menyimpan objek barang
+    choice = 0      # variabel menu
 
+    # perulangan menu utama, berhenti jika pilih 6 (Exit)
     while choice != 6:
         print("+-------------------+")
         print("|   Menu Perintah   |")
@@ -136,6 +141,6 @@ def main():
 
     print("Program selesai.")
 
-
+# menjalankan fungsi main jika file ini dieksekusi langsung
 if __name__ == "__main__":
     main()

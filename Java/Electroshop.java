@@ -1,4 +1,10 @@
+// Saya Nur Abdillah dengan NIM 2408515 mengerjakan Tugas Praktikum 1
+// dalam mata kuliah Desain Pemrograman Berorientasi Objek untuk keberkahan-Nya 
+// maka saya tidak akan melakukan kecurangan seperti yang telah di spesifikasikan
+
 public class Electroshop {
+
+    // Atribut / properti untuk menyimpan data barang elektronik
     private String id;
     private String nama;
     private String kategori;
@@ -18,7 +24,7 @@ public class Electroshop {
         this.harga = harga;
     }
 
-    // Setter & Getter for id
+    // Setter & Getter untuk data
     public void setId(String id) {
         this.id = id;
     }
@@ -27,7 +33,6 @@ public class Electroshop {
         return this.id;
     }
 
-    // Setter & Getter for nama
     public void setNama(String nama) {
         this.nama = nama;
     }
@@ -36,7 +41,6 @@ public class Electroshop {
         return this.nama;
     }
 
-    // Setter & Getter for kategori
     public void setKategori(String kategori) {
         this.kategori = kategori;
     }
@@ -45,7 +49,6 @@ public class Electroshop {
         return this.kategori;
     }
 
-    // Setter & Getter for brand
     public void setBrand(String brand) {
         this.brand = brand;
     }
@@ -54,7 +57,6 @@ public class Electroshop {
         return this.brand;
     }
 
-    // Setter & Getter for harga
     public void setHarga(int harga) {
         this.harga = harga;
     }
@@ -63,7 +65,7 @@ public class Electroshop {
         return this.harga;
     }
 
-    // Methods to get length of fields
+    // Method tambahan untuk menghitung panjang karakter dari masing-masing atribut
     public int idLength() {
         return id != null ? id.length() : 0;
     }
@@ -81,10 +83,11 @@ public class Electroshop {
     }
 
     public int hargaLength() {
-        return String.valueOf(harga).length();
+        return String.valueOf(harga).length(); // konversi harga ke String lalu hitung jumlah digit
     }
 
-    // Edit multiple data fields at once
+
+    // Edit semua data sekaligus
     public void editData(String nama, String kategori, String brand, int harga) {
         this.nama = nama;
         this.kategori = kategori;
@@ -92,13 +95,12 @@ public class Electroshop {
         this.harga = harga;
     }
 
-    // Search by id
+    // Pencarian berdasarkan ID
     public Electroshop searchId(String id) {
         if (this.id != null && this.id.equals(id)) {
-            return this;
+            return this;    // jika ID cocok, kembalikan objek ini
         } else {
-            return null;
+            return null;    // jika tidak cocok, kembalikan null
         }
     }
-
 }
